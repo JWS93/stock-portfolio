@@ -41,6 +41,14 @@ var Portfolio = function (_React$Component) {
       var portfolio = this.state.portfolio;
 
 
+      var portfolio_market_value = portfolio.reduce(function (sum, stock) {
+        return stock.shares_owned * stock.market_price + sum;
+      }, 0);
+      var portfolio_cost = portfolio.reduce(function (sum, stock) {
+        return stock.shares_owned * stock.cost_per_share + sum;
+      }, 0);
+      var portfolio_gain_loss = portfolio_market_value - portfolio_cost;
+
       return React.createElement(
         'div',
         { className: 'container' },
@@ -107,6 +115,9 @@ var Portfolio = function (_React$Component) {
                       market_price = stock.market_price;
 
 
+                  var market_value = shares_owned * market_price;
+                  var unrealized_gain_loss = market_value - shares - owned * cost_per_share;
+
                   return React.createElement(
                     'tr',
                     { key: index },
@@ -130,8 +141,16 @@ var Portfolio = function (_React$Component) {
                       null,
                       React.createElement('input', { type: 'number', name: 'market_price', value: market_price })
                     ),
-                    React.createElement('td', null),
-                    React.createElement('td', null),
+                    React.createElement(
+                      'td',
+                      null,
+                      market_value
+                    ),
+                    React.createElement(
+                      'td',
+                      null,
+                      unrealized_gain_loss
+                    ),
                     React.createElement(
                       'td',
                       null,
@@ -144,6 +163,26 @@ var Portfolio = function (_React$Component) {
                   );
                 })
               )
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-12 col-md-6' },
+            React.createElement(
+              'h4',
+              { className: 'mb-3' },
+              'Portfolio value: $ ',
+              portfolio_market_value
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-12 col-md-6' },
+            React.createElement(
+              'h4',
+              { className: 'mb-3' },
+              'Portfolio Gain/Loss: $ ',
+              portfolio_gain_loss
             )
           )
         )

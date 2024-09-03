@@ -30,11 +30,19 @@ var Portfolio = function (_React$Component) {
         shares_owned: 100,
         cost_per_share: 20,
         market_price: 3
-      }]
+      }],
+      form: {
+        name: '',
+        shares_owned: 0,
+        cost_per_share: 0,
+        market_price: 0
+      }
     };
 
     _this.removeStock = _this.removeStock.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleFormChange = _this.handleFormChange.bind(_this);
+    _this.addStock = _this.addStock.bind(_this);
     return _this;
   }
 
@@ -59,11 +67,43 @@ var Portfolio = function (_React$Component) {
       this.setState({ portfolio: portfolio });
     }
   }, {
+    key: 'handleFormChange',
+    value: function handleFormChange(event) {
+      var _event$target2 = event.target,
+          name = _event$target2.name,
+          value = _event$target2.value;
+      var form = this.state.form;
+
+
+      form[name] = value;
+      this.setState({ form: form });
+    }
+  }, {
+    key: 'addStock',
+    value: function addStock(event) {
+      event.preventDefault();
+      var portfolio = this.state.portfolio.slice();
+
+      portfolio.push(this.state.form);
+
+      this.setState({
+        portfolio: portfolio,
+        form: {
+          name: '',
+          shares_owned: 0,
+          cost_per_share: 0,
+          market_price: 0
+        }
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
-      var portfolio = this.state.portfolio;
+      var _state = this.state,
+          portfolio = _state.portfolio,
+          form = _state.form;
 
 
       var portfolio_market_value = portfolio.reduce(function (sum, stock) {
@@ -196,6 +236,19 @@ var Portfolio = function (_React$Component) {
                   );
                 })
               )
+            )
+          ),
+          React.createElement(
+            'form',
+            { className: 'col-12 my-3', onSubmit: this.addStock },
+            React.createElement('input', { className: 'mx-2', name: 'name', type: 'text', placeholder: 'Name', onChange: this.handleFormChange, value: form.name, required: true }),
+            React.createElement('input', { className: 'mx-2', name: 'shares_owned', type: 'number', placeholder: 'Shares Owned', onChange: this.handleFormChange, value: form.shares_owned, required: true }),
+            React.createElement('input', { className: 'mx-2', name: 'cost_per_share', type: 'number', placeholder: 'Cost / Share', onChange: this.handleFormChange, value: form.cost_per_share, required: true }),
+            React.createElement('input', { className: 'mx-2', name: 'market_price', type: 'number', placeholder: 'Market Price', onChange: this.handleFormChange, value: form.market_price, required: true }),
+            React.createElement(
+              'button',
+              { className: 'btn btn-primary btn-small' },
+              'Add Stock'
             )
           ),
           React.createElement(

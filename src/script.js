@@ -130,7 +130,7 @@ class Portfolio extends React.Component {
             </table>
           </div>
           <form className = "col-12 my-3" onSubmit = {this.addStock}>
-            <input 
+            <label>Stock Name:<input 
               className = "mx-2" 
               name = "name" 
               type = "text" 
@@ -138,31 +138,31 @@ class Portfolio extends React.Component {
               onChange = {this.handleFormChange} 
               value = {form.name} 
               required 
-            />
-            <input 
+            /></label>
+            <label>Shares Owned:<input 
               className = "mx-2" 
               name = "shares_owned" 
               type = "number" 
               placeholder = "Shares Owned" 
               onChange = {this.handleFormChange} 
               value = {form.shares_owned}  
-            />
-            <input 
+            /></label>
+            <label>Cost/Share:<input 
               className = "mx-2" 
               name = "cost_per_share" 
               type = "number" 
               placeholder = "Cost / Share" 
               onChange = {this.handleFormChange} 
               value = {form.cost_per_share}  
-            />
-            <input 
+            /></label>
+            <label>Current Price:<input 
               className = "mx-2" 
               name = "market_price" 
               type = "number" 
               placeholder = "Market Price" 
               onChange = {this.handleFormChange} 
               value = {form.market_price}  
-            />
+            /></label>
             <button className = "btn btn-primary btn-small">Add Stock</button>
           </form>
           <div className = "col-12 col-md-6" >

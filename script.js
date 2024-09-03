@@ -165,7 +165,7 @@ var Portfolio = function (_React$Component) {
                   React.createElement(
                     'th',
                     { scope: 'col' },
-                    'Unrealized Gain/Loss'
+                    'Unrealized Gain/Loss ($)'
                   ),
                   React.createElement('th', { scope: 'col' })
                 )
@@ -181,7 +181,7 @@ var Portfolio = function (_React$Component) {
 
 
                   var market_value = shares_owned * market_price;
-                  var unrealized_gain_loss = market_value - shares - owned * cost_per_share;
+                  var unrealized_gain_loss = market_value - shares_owned * cost_per_share;
 
                   return React.createElement(
                     'tr',
@@ -241,10 +241,39 @@ var Portfolio = function (_React$Component) {
           React.createElement(
             'form',
             { className: 'col-12 my-3', onSubmit: this.addStock },
-            React.createElement('input', { className: 'mx-2', name: 'name', type: 'text', placeholder: 'Name', onChange: this.handleFormChange, value: form.name, required: true }),
-            React.createElement('input', { className: 'mx-2', name: 'shares_owned', type: 'number', placeholder: 'Shares Owned', onChange: this.handleFormChange, value: form.shares_owned, required: true }),
-            React.createElement('input', { className: 'mx-2', name: 'cost_per_share', type: 'number', placeholder: 'Cost / Share', onChange: this.handleFormChange, value: form.cost_per_share, required: true }),
-            React.createElement('input', { className: 'mx-2', name: 'market_price', type: 'number', placeholder: 'Market Price', onChange: this.handleFormChange, value: form.market_price, required: true }),
+            React.createElement('input', {
+              className: 'mx-2',
+              name: 'name',
+              type: 'text',
+              placeholder: 'Name',
+              onChange: this.handleFormChange,
+              value: form.name,
+              required: true
+            }),
+            React.createElement('input', {
+              className: 'mx-2',
+              name: 'shares_owned',
+              type: 'number',
+              placeholder: 'Shares Owned',
+              onChange: this.handleFormChange,
+              value: form.shares_owned
+            }),
+            React.createElement('input', {
+              className: 'mx-2',
+              name: 'cost_per_share',
+              type: 'number',
+              placeholder: 'Cost / Share',
+              onChange: this.handleFormChange,
+              value: form.cost_per_share
+            }),
+            React.createElement('input', {
+              className: 'mx-2',
+              name: 'market_price',
+              type: 'number',
+              placeholder: 'Market Price',
+              onChange: this.handleFormChange,
+              value: form.market_price
+            }),
             React.createElement(
               'button',
               { className: 'btn btn-primary btn-small' },

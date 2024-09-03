@@ -97,7 +97,7 @@ class Portfolio extends React.Component {
                   <th scope = "col">Cost per Share ($)</th>
                   <th scope = "col">Market Price ($)</th>
                   <th scope = "col">Market Value ($)</th>
-                  <th scope = "col">Unrealized Gain/Loss</th>
+                  <th scope = "col">Unrealized Gain/Loss ($)</th>
                   <th scope = "col"></th>
                 </tr>
               </thead>
@@ -111,7 +111,7 @@ class Portfolio extends React.Component {
                   } = stock;
 
                   const market_value = shares_owned * market_price;
-                  const unrealized_gain_loss = market_value - shares-owned * cost_per_share;
+                  const unrealized_gain_loss = market_value - shares_owned * cost_per_share;
 
 
                   return (
@@ -130,10 +130,39 @@ class Portfolio extends React.Component {
             </table>
           </div>
           <form className = "col-12 my-3" onSubmit = {this.addStock}>
-            <input className = "mx-2" name = "name" type = "text" placeholder = "Name" onChange = {this.handleFormChange} value = {form.name} required />
-            <input className = "mx-2" name = "shares_owned" type = "number" placeholder = "Shares Owned" onChange = {this.handleFormChange} value = {form.shares_owned} required />
-            <input className = "mx-2" name = "cost_per_share" type = "number" placeholder = "Cost / Share" onChange = {this.handleFormChange} value = {form.cost_per_share} required />
-            <input className = "mx-2" name = "market_price" type = "number" placeholder = "Market Price" onChange = {this.handleFormChange} value = {form.market_price} required />
+            <input 
+              className = "mx-2" 
+              name = "name" 
+              type = "text" 
+              placeholder = "Name" 
+              onChange = {this.handleFormChange} 
+              value = {form.name} 
+              required 
+            />
+            <input 
+              className = "mx-2" 
+              name = "shares_owned" 
+              type = "number" 
+              placeholder = "Shares Owned" 
+              onChange = {this.handleFormChange} 
+              value = {form.shares_owned}  
+            />
+            <input 
+              className = "mx-2" 
+              name = "cost_per_share" 
+              type = "number" 
+              placeholder = "Cost / Share" 
+              onChange = {this.handleFormChange} 
+              value = {form.cost_per_share}  
+            />
+            <input 
+              className = "mx-2" 
+              name = "market_price" 
+              type = "number" 
+              placeholder = "Market Price" 
+              onChange = {this.handleFormChange} 
+              value = {form.market_price}  
+            />
             <button className = "btn btn-primary btn-small">Add Stock</button>
           </form>
           <div className = "col-12 col-md-6" >
@@ -144,7 +173,7 @@ class Portfolio extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

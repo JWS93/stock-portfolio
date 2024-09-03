@@ -21,7 +21,25 @@ class Portfolio extends React.Component {
         }
       ]
     }
+
+    this.removeStock = this.removeStock.bind(this)
+    this.handleChange = this.handleChange.bind(this);
   };
+
+  handleChange(event, index) {
+    const portfolio = this.state.portfolio.slice();
+    const { name, value } = event.target;
+
+    portfolio[index][name] = value;
+    this.setState({ portfolio });
+  }
+
+  removeStock(index) {
+    const portfolio = this.state.portfolio.slice();
+    portfolio.splice(index, 1);
+
+    this.setState({ portfolio });
+  }
 
   render() {
     const { portfolio } = this.state;
@@ -63,12 +81,12 @@ class Portfolio extends React.Component {
                   return (
                     <tr key = {index}>
                       <td>{name}</td>
-                      <td><input type = "number" name = "shares_owned" value = {shares_owned} /></td>
-                      <td><input type = "number" name = "cost_per_share" value = {cost_per_share} /></td>
-                      <td><input type = "number" name = "market_price" value = {market_price} /></td>
+                      <td><input onChange = {e => this.handleChange(e, index)} type = "number" name = "shares_owned" value = {shares_owned} /></td>
+                      <td><input onChange = {e => this.handleChange(e, index)} type = "number" name = "cost_per_share" value = {cost_per_share} /></td>
+                      <td><input onChange = {e => this.handleChange(e, index)} type = "number" name = "market_price" value = {market_price} /></td>
                       <td>{market_value}</td>
                       <td>{unrealized_gain_loss}</td>
-                      <td><button className = "btn btn-light btn-sm">remove</button></td>
+                      <td><button className = "btn btn-light btn-sm" onClick = {() => this.removeStock(index)}>remove</button></td>
                     </tr>
                   )
                 })}

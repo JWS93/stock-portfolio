@@ -32,12 +32,37 @@ var Portfolio = function (_React$Component) {
         market_price: 3
       }]
     };
+
+    _this.removeStock = _this.removeStock.bind(_this);
+    _this.handleChange = _this.handleChange.bind(_this);
     return _this;
   }
 
   _createClass(Portfolio, [{
+    key: 'handleChange',
+    value: function handleChange(event, index) {
+      var portfolio = this.state.portfolio.slice();
+      var _event$target = event.target,
+          name = _event$target.name,
+          value = _event$target.value;
+
+
+      portfolio[index][name] = value;
+      this.setState({ portfolio: portfolio });
+    }
+  }, {
+    key: 'removeStock',
+    value: function removeStock(index) {
+      var portfolio = this.state.portfolio.slice();
+      portfolio.splice(index, 1);
+
+      this.setState({ portfolio: portfolio });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var portfolio = this.state.portfolio;
 
 
@@ -129,17 +154,23 @@ var Portfolio = function (_React$Component) {
                     React.createElement(
                       'td',
                       null,
-                      React.createElement('input', { type: 'number', name: 'shares_owned', value: shares_owned })
+                      React.createElement('input', { onChange: function onChange(e) {
+                          return _this2.handleChange(e, index);
+                        }, type: 'number', name: 'shares_owned', value: shares_owned })
                     ),
                     React.createElement(
                       'td',
                       null,
-                      React.createElement('input', { type: 'number', name: 'cost_per_share', value: cost_per_share })
+                      React.createElement('input', { onChange: function onChange(e) {
+                          return _this2.handleChange(e, index);
+                        }, type: 'number', name: 'cost_per_share', value: cost_per_share })
                     ),
                     React.createElement(
                       'td',
                       null,
-                      React.createElement('input', { type: 'number', name: 'market_price', value: market_price })
+                      React.createElement('input', { onChange: function onChange(e) {
+                          return _this2.handleChange(e, index);
+                        }, type: 'number', name: 'market_price', value: market_price })
                     ),
                     React.createElement(
                       'td',
@@ -156,7 +187,9 @@ var Portfolio = function (_React$Component) {
                       null,
                       React.createElement(
                         'button',
-                        { className: 'btn btn-light btn-sm' },
+                        { className: 'btn btn-light btn-sm', onClick: function onClick() {
+                            return _this2.removeStock(index);
+                          } },
                         'remove'
                       )
                     )
